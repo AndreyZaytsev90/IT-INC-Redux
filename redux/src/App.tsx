@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {useAppSelector} from "./hooks/hooks";
+import {Todos} from "./Todos";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const todos = useAppSelector(state => state.todos)
+
+    return (
+        <div>
+            {todos.map(el => {
+                return (
+                    <Todos
+                        key={el.id}
+                        todolistID={el.id}
+                        title={el.title}
+                        filter={el.filter}
+                    />
+                )
+            })}
+        </div>
+    );
 }
 
 export default App;
